@@ -10,8 +10,7 @@ Plug 'ryanoasis/vim-devicons'
 Plug 'airblade/vim-gitgutter'
 Plug 'ctrlpvim/ctrlp.vim' " fuzzy find files
 Plug 'scrooloose/nerdcommenter'
-"Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
-
+Plug 'mattn/emmet-vim'
 Plug 'morhetz/gruvbox'
 
 Plug 'HerringtonDarkholme/yats.vim' " TS Syntax
@@ -21,8 +20,8 @@ call plug#end()
 
 inoremap jk <ESC>
 nmap <C-n> :NERDTreeToggle<CR>
-vmap ++ <plug>NERDCommenterToggle
-nmap ++ <plug>NERDCommenterToggle
+vmap ## <plug>NERDCommenterToggle
+nmap ## <plug>NERDCommenterToggle
 
 " open NERDTree automatically
 "autocmd StdinReadPre * let s:std_in=1
@@ -45,14 +44,11 @@ let g:NERDTreeGitStatusWithFlags = 1
 
 let g:NERDTreeIgnore = ['^node_modules$']
 
-" vim-prettier
-"let g:prettier#quickfix_enabled = 0
-"let g:prettier#quickfix_auto_focus = 0
 " prettier command for coc
 command! -nargs=0 Prettier :CocCommand prettier.formatFile
 " run prettier on save
-"let g:prettier#autoformat = 0
-"autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue,*.yaml,*.html PrettierAsync
+let g:prettier#autoformat = 0
+autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue,*.yaml,*.html PrettierAsync
 
 
 " ctrlp
@@ -62,9 +58,10 @@ let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclu
 noremap <silent> <expr> j (v:count == 0 ? 'gj' : 'j')
 noremap <silent> <expr> k (v:count == 0 ? 'gk' : 'k')
 
-set relativenumber
+set number
 
 set smarttab
+set formatoptions=tcqrn1
 set cindent
 set tabstop=2
 set shiftwidth=2
@@ -90,6 +87,9 @@ endfunction
 
 " Highlight currently open buffer in NERDTree
 autocmd BufEnter * call SyncTree()
+
+" Emmet extension
+let g:user_emmet_leader_key=','
 
 " coc config
 let g:coc_global_extensions = [
